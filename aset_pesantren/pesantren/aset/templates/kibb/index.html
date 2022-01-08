@@ -1,0 +1,105 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
+{% block navactivekib %} active {% endblock navactivekib %}
+
+{% block navactivekibb %} active {% endblock navactivekibb %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="#">Kartu Inventaris Barang B (Peralatan dan Mesin) </a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+{% block print %}
+  <table>
+    <form  action="{% url 'aset:Print_kibb'%}" method="POST"  target="_blank">
+      {% csrf_token %}
+    <tr>
+      <th>
+        <select name="id_ruangan" class="form-control" required >
+          <option value="" selected disabled hidden>Pelaksana Kegiatan</option>
+          {% for k in kibaa %}
+          <option value="{{k.id_kelompok}}">{{k.nama_kelompok}} </option>
+          {% endfor %}
+        </select>
+      </th>
+      <th style="text-align: right;"><button type="submit"  class="btn btn-outline-success"></a> KIB  B</button></th>
+    </tr>
+  </form>
+  <tr>
+    <td></td>
+    <td style="text-align: right;"><a href="{% url 'aset:Print_kibbF'%}" title="Cetak Aset KIB B" target="_blank"><button class="btn btn-light "><i class="fas fa-print" style="color: rgb(0, 0, 0);"></i> Full </button> </a></td>
+  </tr>
+  </table>
+  
+{% endblock print %}
+
+{% block content %}
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="card card-outline card-success">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-sd-card mr-1"></i>
+            Kartu Inventaris Barang B (Peralatan dan Mesin)
+          </h3>
+        
+          </div><!-- /.card-header -->
+        <div class="card-body">
+            <!-- Morris chart - Sales -->
+                  <table class="table table-striped table-hover table-sm" id="example2">
+                    <thead class="table-success">
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Kode Aset</th>
+                        <th scope="col">Nama Aset</th>
+                        <th scope="col">Pelaksana Kegiatan Yayasan</th>
+                        <th scope="col">Merek</th>
+                        <th scope="col">Ukuran</th>
+                        <th scope="col">Bahan</th>
+                        <th scope="col">No Pabrik</th>
+                        <th scope="col">No Rangka</th>
+                        <th scope="col">No Mesin</th>
+                        <th scope="col">No Polisi</th>
+                        <th scope="col">No BPKB</th>
+                        <th scope="col">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for kibb in object_list %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{kibb.id_aset.id_ruangan.id_kelompok_id}}-{{kibb.id_aset.id_jenis.id_klasifikasi_id}}-{{kibb.id_aset.id_jenis_id}}-{{kibb.id_aset.id_ruangan.id_lokasi_id}}-{{kibb.id_aset.no}}-{{kibb.id_aset.tahun_perolehan}}</td>
+                        <td>{{kibb.id_aset}}</td>
+                        <td>{{kibb.id_aset.id_ruangan.id_kelompok.nama_kelompok}}</td>
+                        <td>{{kibb.merek}}</td>
+                        <td>{{kibb.ukuran}}</td>
+                        <td>{{kibb.bahan}}</td>
+                        <td>{{kibb.no_pabrik}}</td>
+                        <td>{{kibb.no_rangka}}</td>
+                        <td>{{kibb.no_mesin}}</td>
+                        <td>{{kibb.no_polisi}}</td>
+                        <td>{{kibb.no_bpkb}}</td>
+                        <td>
+                          <style> 
+                                  i.jambu{color:green}
+                          </style>                          
+                          <a href="{% url 'aset:editKibb' kibb.id_aset.id_aset %}"  class="btn btn-sm jambu"><i class="fas fa-edit jambu"></i></a> 
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>                              
+            </div>   
+        </div><!-- /.card-body -->
+      </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.Left col -->
+  </div>
+{% endblock content %}

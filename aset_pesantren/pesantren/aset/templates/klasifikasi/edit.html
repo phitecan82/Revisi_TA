@@ -1,0 +1,56 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkodeaset %} menu-open {% endblock navmenuopenkodeaset %}
+{% block navactivekodeaset %} active {% endblock navactivekodeaset %}
+
+{% block navactiveklasifikasiaset %} active {% endblock navactiveklasifikasiaset %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexKlasifikasi' %}">Klasifikasi Aset Yayasan</a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+<div class="row">
+  <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+              <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-outline card-success">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fas fa-object-group mr-1"></i>
+                    Klasifikasi Aset
+                  </h3>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <form action="{% url 'aset:editKlasifikasi' klasifikasi.id_klasifikasi %}" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                          <input type="hidden" name="id_klasifikasi" class=" form-control " id="id_klasifikasi" value="{{ klasifikasi.id_klasifikasi }} " readonly>
+                        </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label for="nama_klasifikasi">Nama Klasifikasi</label>
+                          <div class="input-group mb-3">
+                          <input type="text" name="nama_klasifikasi" class="form-control" id="nama_klasifikasi" value="{{ klasifikasi.nama_klasifikasi }}" maxlength="50" required>
+                          <button type="submit" class="btn btn-success"> Ubah Data</button>
+                          </div>
+                        </div>
+                      
+                      </div>
+                     
+                    </form>
+              </div>
+            <!-- /.body -->
+          </div>
+        <!-- /.card -->
+      </section>
+    <!-- /.Left col -->
+</div>
+  {% endblock content %}

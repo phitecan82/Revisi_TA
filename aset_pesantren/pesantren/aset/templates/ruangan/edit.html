@@ -1,0 +1,74 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block nav-menu-open-data-ruangan %} menu-open {% endblock nav-menu-open-data-ruangan %}
+{% block nav-active-data-ruangan %} active {% endblock nav-active-data-ruangan %}
+
+
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexRuangan' %}">Ruangan Aset Yayasan</a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+<div class="row">
+  <!-- Left col -->
+  <section class="col-lg-12 connectedSortable">
+    <!-- Custom tabs (Charts with tabs)-->
+    <div class="card card-outline card-success">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-street-view mr-1"></i>
+          Ruangan Aset
+        </h3>
+        </div><!-- /.card-header -->
+      <div class="card-body">
+              <form action="{% url 'aset:editRuangan' ruangan.id_ruang %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="form-row">
+
+                    <div class="form-group col-md-4">
+                      <input type="hidden" name="id_ruangan" class=" form-control " id="id_ruangan" value="{{ ruangan.id_ruang}}" readonly>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="nama_ruangan">Nama Ruangan</label>
+                      <input type="text" name="nama_ruangan" class="form-control" maxlength="50" id="nama_ruangan" value="{{ ruangan.nama_ruang }}" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="id_kelompok"> Pelaksana Kegiatan Yayasan</label>
+
+                      <select  id="id_kelompok " name="id_kelompok" class=" form-control" required>
+                        
+                        {% for t in kelompok %}
+                        <option value="{{t.id_kelompok}}" {% if ruangan.id_kelompok_id == t.id_kelompok %}  selected {% endif %}>{{t.nama_kelompok}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="id_lokasi">Lokasi</label>
+
+                      <select  id="id_lokasi " name="id_lokasi" class=" form-control" required>
+                        
+                        {% for t in lokasi %}
+                        <option value="{{t.id_lokasi}}" {% if ruangan.id_lokasi_id == t.id_lokasi %}  selected {% endif %}>{{t.nama_lokasi}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  
+                  </div>
+                  <button type="submit" class="btn btn-success">Ubah Data  </button>
+                  <a href="{% url 'aset:indexRuangan'%}" class="btn btn-primary">Kembali</a>
+                </form>
+              </div>
+              <!-- /.body -->
+            </div>
+          <!-- /.card -->
+        </section>
+      <!-- /.Left col -->
+  </div>
+{% endblock content %}

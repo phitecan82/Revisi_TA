@@ -1,0 +1,34 @@
+<form action="{% url 'aset:addRuangan'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+
+      <div class="form-group col-md-3">
+        <label for="id_ruangan">Id Ruangan </label>
+        <input type="text" name="id_ruangan" class=" form-control " id="id_ruangan" maxlength="4" required >
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="nama_ruangan">Nama Ruangan</label>
+        <input type="text" name="nama_ruangan" class="form-control" id="nama_ruangan" maxlength="50" required>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="id_kelompok"> Pelaksana Kegiatan Yayasan</label>
+        <select  id="id_kelompok " name="id_kelompok" class=" form-control" required>
+          {% for kelompok in kelompok_list %}
+          <option value="{{kelompok.id_kelompok}}">{{kelompok.nama_kelompok}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="id_lokasi"> Lokasi</label>
+        <select  id="id_lokasi " name="id_lokasi" class=" form-control" required>
+          {% for lokasi in lokasi_list %}
+          <option value="{{lokasi.id_lokasi}}">{{lokasi.nama_lokasi}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+    
+    </div>
+    <button type="submit" class="btn btn-primary">Tambah Data </button>
+  </form>

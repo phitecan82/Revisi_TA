@@ -1,0 +1,25 @@
+<form action="{% url 'aset:addJenis'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+      
+      <div class="form-group col-md-4">
+        <label for="id_jenis">Id Jenis</label>
+        <input type="text"   name="id_jenis" class=" form-control  "  id="id_jenis"  placeholder="ID Jenis" maxlength="3" required>
+      </div>
+      
+      <div class="form-group col-md-4">
+        <label for="nama_jenis">Nama Jenis</label>
+        <input type="text" name="nama_jenis" class="form-control" id="nama_jenis" maxlength="50" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="id_klasifikasi"> Klasifikasi Aset</label>
+        <select  id="id_klasifikasi " name="id_klasifikasi" class=" form-control "  required>
+          {% for Klasifikasi in klasifikasi_list %}
+          <option value="{{Klasifikasi.id_klasifikasi}}">{{Klasifikasi.nama_klasifikasi}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Tambah Data </button>
+  </form>

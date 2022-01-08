@@ -1,0 +1,82 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
+{% block navactivekib %} active {% endblock navactivekib %}
+
+{% block navactivekibb %} active {% endblock navactivekibb %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexKibb' %}">Kartu Inventaris Barang B (Peralatan dan Mesin) </a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="card card-outline card-success">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-sd-card mr-1"></i>
+            Kartu Inventaris Barang B (Peralatan dan Mesin)
+          </h3>
+          </div><!-- /.card-header -->
+        <div class="card-body">
+     <!-- Morris chart - Sales -->
+        <form action="{% url 'aset:editKibb' kibb.id_aset.id_aset %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <input type="hidden" name="id_aset" class=" form-control " id="id_aset" value="{{ kibb.id_aset.id_aset}}" readonly >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="merek">Merek</label>
+              <input type="text" name="merek" class="form-control " value="{{ kibb.merek}}" maxlength="100" id="merek" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="ukuran">Ukuran</label>
+              <input type="text" name="ukuran" class="form-control " value="{{ kibb.ukuran}}" maxlength="50" id="ukuran" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="bahan">Bahan</label>
+              <input type="text" name="bahan" class="form-control " value="{{ kibb.bahan}}" id="bahan" maxlength="50" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="no_pabrik">No Pabrik</label>
+              <input type="text" name="no_pabrik" class="form-control" value="{{ kibb.no_pabrik}}" id="no_pabrik" maxlength="50" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="no_rangka">No Rangka</label>
+              <input type="text" name="no_rangka" class="form-control " value="{{ kibb.no_rangka}}" id="no_rangka"  maxlength="50">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="no_mesin">No Mesin</label>
+              <input type="text" name="no_mesin" class="form-control " value="{{ kibb.no_mesin}}" id="no_mesin" maxlength="50">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="no_polisi">No Polisi</label>
+              <input type="text" name="no_polisi" class="form-control " value="{{ kibb.no_polisi}}" id="no_polisi" maxlength="30" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="no_bpkb">No BPKB</label>
+              <input type="text" name="no_bpkb" class="form-control " value="{{ kibb.no_bpkb}}" id="no_bpkb" maxlength="30" >
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Ubah Data </button>
+          <a href="{% url 'aset:indexKibb' %}" class="btn btn-primary">Kembali</a>
+        </form>                      
+        </div>   
+        </div><!-- /.card-body -->
+      </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.Left col -->
+  </div>
+{% endblock content %}

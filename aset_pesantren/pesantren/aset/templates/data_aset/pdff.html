@@ -1,0 +1,159 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin-left: 1.58cm;
+            margin-top: 1.18cm;
+            margin-right: 1.18cm;
+            margin-bottom: 1.18cm;
+            @frame footer_frame { /* Another static Frame */
+                  -pdf-frame-content: footer_content;
+                  right: -400pt; width: 512pt; bottom:  0.75cm; height: 20pt;
+                  }
+
+        }
+        img.img{
+          width: 50px;
+          zoom: 130%;
+          
+        }
+        h1,h2,h3,h4{
+          font-family: 'Times New Roman';
+        }
+        h1{
+            margin: 0;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 7;
+        } 
+        h2{
+            margin: 0;
+            padding-bottom: 25px;
+            text-align: center;
+            font-size: 6;
+        }
+        #tables {
+          font-family: 'Verdana';
+          font-weight: bolder;
+          border-collapse: collapse;
+          width: 100%;
+          font-size: 7px;
+          
+
+        }
+        #tables td, #tables th {
+          border: 0.5px solid rgb(63, 63, 63);
+        }
+
+        #tables th {
+          text-align: center;
+          background-color: #daeca8;
+          color: black;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        #tables td{
+          text-align: center;
+          padding-top: 3px;
+        }
+        table{
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 5px;
+          background-color: #fff;
+          
+        }
+        #ya{
+          border :none;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        #tes{
+          border :none;
+          padding-top: 15px;
+          padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+  <div id="footer_content">(c) - Halaman <pdf:pagenumber>
+    / <pdf:pagecount>
+  </div>
+  
+  <header >
+    <span style="font-size: 3;"> {{ today | date:"d / F / Y" }}</span>   
+  <table id="tes">
+    <tr>
+      <th style="text-align:right; padding: auto;"><img class="img" src="AdminLTE/dist/img/shinealfalah.png" alt=""></th>
+      <th style="text-align: left; padding: auto;" rowspan="2"><strong> <h2>YAYASAN SHINE AL-FALAH
+        KARTU INVENTARIS RUANGAN</h2></strong></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+
+  </table>
+  </header>
+        <table id='ya'>
+          <tr>
+            <td> <strong>Pelasana Kegiatan Yayasan :</strong>  {% for aset in kibs  %} {{aset.id_kelompok.nama_kelompok}} {% endfor%} </td> 
+            <td style="text-align: right;"><strong>Lokasi :</strong>  {% for aset in kibs %} {{aset.id_lokasi.nama_lokasi}} {% endfor%} </td>
+          </tr>
+          <tr>
+            <td><strong>Ruangan : </strong> {% for aset in kibs %} {{aset.nama_ruang}} {% endfor%} </td>
+          </tr>
+        </table>
+        <table id="tables"> 
+              <tr>
+                <th class="no" style="width:20px">No. Urut</th>
+                <th >Nama Barang / Jenis Barang</th>
+                <th >Merk/Model</th>
+                <th >No. Seri Pabrik</th>
+                <th >Ukuran</th>
+                <th >Bahan</th>
+                <th >Tahun Pembuatan/ Pembelian</th>
+                <th >No. Kode Barang</th>
+                <th >Harga Beli / Perolehan</th>
+                <th >Keadaan Barang</th>
+                <th >Ketetarangan </th>
+              </tr>
+            {% for aset in data_aset %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{aset.nama_aset}}</td>
+                <td>{{aset.kibb.merek}}</td>
+                <td>{{aset.kibb.no_pabrik}}</td>
+                <td>{{aset.kibb.bahan}}</td>
+                <td>{{aset.tahun_perolehan}}</td>
+                <td>{{aset.id_ruangan.id_kelompok_id}}-{{aset.id_jenis.id_klasifikasi_id}}-{{aset.id_jenis_id}}-{{aset.id_ruangan.id_lokasi_id}}-{{aset.no}}-{{aset.tahun_perolehan}}</td>
+                <td>{{aset.kiba.no_sertifikat}} {{aset.kibb.no_pabrik}} {{aset.kibb.no_mesin}}</td>
+                <td>Rp{{aset.harga |intcomma}}</td>
+                <td>{{aset.get_status_aset_display}}</td>
+                <td>{{aset.keterangan}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+          <table id='tes'>
+            <tr>
+              <td style="text-align: center;"> MENGETAHUI,PENGURUS YAYASAN SHINE AL-FALAH</td> 
+              <td style="text-align: center;">.......................................................</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">(.....................................................)</td>
+              <td style="text-align: center;">(.....................................................)</td>
+              
+            </tr>
+          </table>     
+
+         
+</body>
+</html>

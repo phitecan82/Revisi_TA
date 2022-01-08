@@ -1,0 +1,90 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
+{% block navactivekib %} active {% endblock navactivekib %}
+
+{% block navactivekibc %} active {% endblock navactivekibc %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexKibc' %}">Kartu Inventaris Barang C (Gedung dan Bangunan) </a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+{% load humanize %}
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="card card-outline card-success">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-sd-card mr-1"></i>
+            Kartu Inventaris Barang C (Gedung dan Bangunan)
+          </h3>
+        
+          </div><!-- /.card-header -->
+        <div class="card-body">
+     <!-- Morris chart - Sales -->
+        <form action="{% url 'aset:editKibc' kibc.id_aset.id_aset %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <input type="hidden" name="id_aset" class=" form-control " id="id_aset" value="{{ kibc.id_aset.id_aset}}" readonly >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="kober"> Kontruksi Bertingkat ?</label>
+              <select  id="kober " name="kober" class=" form-control " >
+                <option value="True" {% if kibc.kontruksi_bertingkat == 1 %}  selected {% endif %}>Ya </option>
+                <option value="False"{% if kibc.kontruksi_bertingkat == 0 %}  selected {% endif %}>Tidak</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="kobet"> Kontruksi Beton ?</label>
+              <select  id="kobet " name="kobet" class=" form-control " >
+                <option value="True" {% if kibc.kontruksi_beton == 1 %}  selected {% endif %}>Ya </option>
+                <option value="False"{% if kibc.kontruksi_beton == 0 %}  selected {% endif %}>Tidak</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="lulan">Luas Lantai</label>
+              <input type="number" name="lulan" class="form-control " id="lulan"  min="0" value="{{ kibc.luas_lantai}}" onKeyPress="if(this.value.length==10) return false;" step="any" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="luasg">Luas Gedung</label>
+              <input type="number" name="luasg" class="form-control " id="luasg"  min="0" value="{{ kibc.luas}}" onKeyPress="if(this.value.length==10) return false;" step="any" >
+            </div>
+            <div class="form-group col-md-3">
+              <label for="tadoge">Tanggal Dokumen Gedung</label>
+              <input type="date" name="tadoge" class="form-control "  value="{{ kibc.tanggal_dokumen_gedung|date:'Y-m-d'}}" id="tadoge" >
+            </div>
+            <div class="form-group col-md-3">
+              <label for="nodoge">No Dokumen Gedung</label>
+              <input type="text" name="nodoge" class="form-control " value="{{ kibc.no_dokumen_gedung }}" maxlength="50" id="nodoge" >
+            </div>
+            <div class="form-group col-md-2">
+              <label for="sta">Status Tanah </label>
+              <input type="text" name="sta" class="form-control " value="{{ kibc.status_tanah }}" id="sta" maxlength="50">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="nokota">No Kode Tanah </label>
+              <input type="text" name="nokota" class="form-control"  value="{{ kibc.no_kode_tanah }}" id="nokota" maxlength="50" >
+            </div>
+        </div>
+          <button type="submit" class="btn btn-success">Ubah Data </button>
+          <a href="{% url 'aset:indexKibc' %}" class="btn btn-primary">Kembali</a>
+        </form>                      
+        </div>   
+        </div><!-- /.card-body -->
+      </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.Left col -->
+  </div>
+{% endblock content %}

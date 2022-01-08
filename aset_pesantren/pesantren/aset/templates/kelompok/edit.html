@@ -1,0 +1,58 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkodeaset %} menu-open {% endblock navmenuopenkodeaset %}
+{% block navactivekodeaset %} active {% endblock navactivekodeaset %}
+
+{% block navactivekelompokaset %} active {% endblock navactivekelompokaset %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexKelompok' %}">Kelompok Pelaksana Kegiatan Yayasan </a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+<div class="row">
+  <!-- Left col -->
+  <section class="col-lg-12 connectedSortable">
+    <!-- Custom tabs (Charts with tabs)-->
+    <div class="card card-outline card-success">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-users mr-1"></i>
+           Pelaksana Kegiatan Yayasan 
+        </h3>
+        </div><!-- /.card-header -->
+      <div class="card-body">
+        <form action="{% url 'aset:editKelompok' kelompok.id_kelompok %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+
+              <div class="form-group col-auto">
+                <input type="hidden" name="id_kelompok" class=" form-control " id="id_kelompok" value="{{ kelompok.id_kelompok}}" readonly >
+              </div>
+              </div>
+              <div class="form-row">
+              <div class="form-group col-auto">
+                <label for="nama_kelompok">Nama Pelaksana Kegiatan</label>
+                <div class="input-group mb-3">
+                
+                <input type="text" name="nama_kelompok" class="form-control" id="nama_kelompok" value="{{ kelompok.nama_kelompok }}" maxlength="50" required>
+                <button type="submit" class="btn btn-success">Ubah Data </button>
+                </div>
+              </div>
+            
+            </div>
+            <!-- <a href="{% url 'aset:indexKelompok' %}" class="btn btn-primary">Kembali</a> -->
+          </form>
+          
+          </div>
+        <!-- /.body -->
+      </div>
+      <!-- /.card -->
+    </section>
+  <!-- /.Left col -->
+</div>
+  {% endblock content %}

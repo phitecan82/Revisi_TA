@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SIM ASET Yayasan Shine Al - Falah | Log in</title>
+  {% load static %}
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "layouts/link.html" %}
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b></b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      
+      <img class="rounded mx-auto d-block" width="60px" src="../static/AdminLTE/dist/img/shinealfalah.png" alt="">
+      <p class="login-box-msg"> <span> SIM  Aset Shine Al - Falah </span></p>
+      <hr>
+      <form action="{% url 'aset:login' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" name="username" id="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+            <input type="password" name="password"  class="form-control"  id="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+         
+          <!-- /.col -->
+          <div class="col-4"></div>
+          <div class="col-4 ">
+            <button type="submit" class="btn btn-success btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      
+      <!-- /.social-auth-links -->
+
+      
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+{% include "layouts/script.html" %}
+</body>
+</html>

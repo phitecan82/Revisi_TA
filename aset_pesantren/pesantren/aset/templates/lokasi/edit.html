@@ -1,0 +1,59 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkodeaset %} menu-open {% endblock navmenuopenkodeaset %}
+{% block navactivekodeaset %} active {% endblock navactivekodeaset %}
+
+{% block navactivelokasiaset %} active {% endblock navactivelokasiaset %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexLokasi' %}">Lokasi Aset Yayasan</a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+
+<div class="row">
+  <!-- Left col -->
+  <section class="col-lg-12 connectedSortable">
+    <!-- Custom tabs (Charts with tabs)-->
+    <div class="card card-outline card-success">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-map-marker-alt mr-1"></i>
+          Lokasi Aset
+        </h3>
+        </div><!-- /.card-header -->
+            <div class="card-body">
+                  <form action="{% url 'aset:editLokasi' lokasi.id_lokasi %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+
+                      <div class="form-group col-md-4">
+
+                        <input type="hidden" name="id_lokasi" class=" form-control " id="id_lokasi" value="{{lokasi.id_lokasi}}" readonly>
+                      </div>
+                      </div>
+                      <div class="form-row">
+                      <div class="form-group col-auto">
+                        <label for="nama_lokasi">Nama Lokasi</label>
+                        <input type="text" name="nama_lokasi" class="form-control" id="nama_lokasi" value="{{lokasi.nama_lokasi}}" maxlength="50" required>
+                      </div>
+                      <div class="form-group col-auto">
+                        <label for="alamat">Alamat </label>
+                        <input type="text" name="alamat" class="form-control" id="alamat" value="{{lokasi.alamat}}" maxlength="50" required>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Ubah Data</button>
+                    <a href="{% url 'aset:indexLokasi' %}" class="btn btn-primary">Kembali</a>
+                  </form>
+                </div>
+                <!-- /.body -->
+              </div>
+            <!-- /.card -->
+          </section>
+        <!-- /.Left col -->
+    </div>
+{% endblock content %}

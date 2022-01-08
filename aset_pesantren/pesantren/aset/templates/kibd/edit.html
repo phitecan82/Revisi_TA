@@ -1,0 +1,87 @@
+{% extends "../layouts/app.html" %}
+
+{% block title %} Aset {% endblock title %}
+
+{% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
+{% block navactivekib %} active {% endblock navactivekib %}
+
+{% block navactivekibd %} active {% endblock navactivekibd %}
+
+{% block content-header-page %}
+<li class="breadcrumb-item"><a href="{% url 'aset:indexKibd' %}">Kartu Inventaris Barang D (Aset Tetap Lainnya) </a></li>
+<li class="breadcrumb-item active"></li>
+{% endblock content-header-page %}
+
+
+{% block content %}
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="card card-outline card-success">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-sd-card mr-1"></i>
+            Kartu Inventaris Barang D (Aset Tetap Lainnya)
+          </h3>
+        
+          </div><!-- /.card-header -->
+        <div class="card-body">
+     <!-- Morris chart - Sales -->
+        <form action="{% url 'aset:editKibd' kibd.id_aset.id_aset %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <input type="hidden" name="id_aset" class=" form-control " id="id_aset" value="{{ kibd.id_aset.id_aset}}" readonly >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="judul">Judul Buku</label>
+              <input type="text" name="judul" class="form-control " value="{{ kibd.judul_buku}}" id="judul" maxlength="50">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="spek">Spesifikasi Buku</label>
+              <input type="text" name="spek" class="form-control " value="{{ kibd.spesifikasi_buku}}" id="spek" maxlength="50" >
+            </div>
+            <div class="form-group col-md-3">
+              <label for="tacebu">Tahun Cetak Buku</label>
+              <input type="number" name="tacebu" class="form-control " value="{{ kibd.tahun_cetak}}" min="1990" onKeyPress="if(this.value.length==4) return false;"  id="tacebu" >
+            </div>
+            <div class="form-group col-md-3">
+              <label for="asdake">Asal Daerah Kesenian </label>
+              <input type="text" name="asdake" class="form-control " value="{{ kibd.asal_daerah_kesenian}}" id="asdake" maxlength="50">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="peke">Pencipta Kesenian </label> 
+              <input type="text" name="peke" class="form-control " value="{{ kibd.pencipta_kesenian}}" id="peke" maxlength="50" >
+            </div>
+            <div class="form-group col-md-4">
+              <label for="bake">Bahan Kesenian </label>
+              <input type="text" name="bake" class="form-control " value="{{ kibd.bahan_kesenian}}" id="bake" maxlength="70" >
+            </div>
+            <div class="form-group col-md-3">
+              <label for="jehe">Jenis Hewan </label>
+              <input type="text" name="jehe" class="form-control " value="{{ kibd.jenis_hewan}}" id="jehe" maxlength="50">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="uhe">Ukuran Hewan</label>
+              <input type="number" name="uhe" class="form-control " id="uhe"  min="0" value="{{ kibd.ukuran_hewan}}" onKeyPress="if(this.value.length==10) return false;">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="jumlah">Jumlah</label>
+              <input type="number" name="jumlah" class="form-control " id="jumlah"  min="0" value="{{ kibd.jumlah_hewan}}" onKeyPress="if(this.value.length==10) return false;">
+            </div>
+        </div>
+          <button type="submit" class="btn btn-success">Ubah Data </button>
+          <a href="{% url 'aset:indexKibd' %}" class="btn btn-primary">Kembali</a>
+        </form>                      
+        </div>   
+        </div><!-- /.card-body -->
+      </div>
+      </div>
+      <!-- /.card -->
+    </section>
+    <!-- /.Left col -->
+  </div>
+{% endblock content %}

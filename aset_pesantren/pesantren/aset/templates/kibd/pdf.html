@@ -1,0 +1,167 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin-left: 1.58cm;
+            margin-top: 1.18cm;
+            margin-right: 1.18cm;
+            margin-bottom: 1.18cm;
+            @frame footer_frame { /* Another static Frame */
+                  -pdf-frame-content: footer_content;
+                  right: -400pt; width: 512pt; bottom:  0.75cm; height: 20pt;
+                  }
+
+        }
+        img.img{
+          width: 50px;
+          zoom: 130%;
+        }
+        h2{
+          font-family: 'Times New Roman';
+        }
+  
+        h2{
+            margin: 0;
+            padding-bottom: 25px;
+            text-align: center;
+            font-size: 6;
+        }
+        #tables {
+          font-family: 'Verdana';
+          font-weight: bolder;
+          border-collapse: collapse;
+          width: 100%;
+          font-size: 7px;
+          
+
+        }
+        #tables td, #tables th {
+          border: 0.5px solid rgb(63, 63, 63);
+        }
+
+        #tables th {
+          text-align: center;
+          background-color: #daeca8;
+          color: black;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        #tables td{
+          text-align: center;
+          padding-top: 3px;
+        }
+        table{
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 5px;
+          background-color: #fff;
+          
+        }
+        #ya{
+          border :none;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        #tes{
+          border :none;
+          padding-top: 30px;
+          padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+  <div id="footer_content">(c) - Halaman <pdf:pagenumber>
+    / <pdf:pagecount>
+  </div>
+  <header >
+    <span style="font-size: 3;"> {{ today | date:"d / F / Y" }}</span>   
+  <table id="tes">
+    <tr>
+      <th style="text-align:right; padding: auto;"><img class="img" src="AdminLTE/dist/img/shinealfalah.png" alt=""></th>
+      <th style="text-align: left; padding: auto;" rowspan="2"><strong> <h2>YAYASAN SHINE AL-FALAH KARTU INVENTARIS BARANG 
+        D. ASET TETAP LAINNYA</h2></strong></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+
+  </table>
+  </header>
+  
+        <table id='ya'>
+          <tr>
+            <td> <strong>Pelasana Kegiatan Yayasan :</strong>  {% for aset in kibs  %} {{aset.id_kelompok.nama_kelompok}} {% endfor%} </td> 
+            <td style="text-align: right;"><strong>Lokasi :</strong>  {% for aset in kibs %} {{aset.id_lokasi.nama_lokasi}} {% endfor%} </td>
+          </tr>
+          <tr>
+            <td><strong>Ruangan : </strong> {% for aset in kibs %} {{aset.nama_ruang}} {% endfor%} </td>
+          </tr>
+        </table>
+        <table id="tables">
+          <tr>
+            <th class="no" style="width:25px" rowspan="2">No  </th>
+            <th style="width:150px" rowspan="2">Nama Barang/  Jenis Barang</th>
+            <th colspan="2">Nomor</th>
+            <th colspan="2">Buku/Perpustakaan</th> 
+            <th colspan="3">Barang Bercorak Kesenian/Kebudayaan</th>
+            <th colspan="2">Hewan/Ternak dan Tumbuhan</th>
+            <th style="width:30px" rowspan="2">Jumlah</th>
+            <th style="width:110px" rowspan="2">Tahun Cetak / Pembelian</th>
+            <th style="width:90px" rowspan="2">Asal Usul Cara Perolehan</th>
+            <th style="width:65px" rowspan="2">Harga Dalam Ribuan (Rp.) </th>
+            <th style="width:100px" rowspan="2">Keterangan</th>
+          </tr>
+          <tr>
+            <td style="width:100px">Kode Barang</td>
+            <td style="width:40px">Register</td>
+            <td style="width:90px">Judul/Pencipta</td>
+            <td style="width:50px">Spesifikasi</td>
+            <td style="width:70px">Asal Daerah</td>
+            <td style="width:70px">Pencipta </td>
+            <td style="width:70px">Bahan </td>
+            <td style="width:70px">Jenis</td>
+            <td style="width:50px">Ukuran</td>
+          </tr>
+        {% for aset in kibd %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{aset.id_aset}}</td>
+            <td>{{aset.id_aset.id_ruangan.id_kelompok_id}}-{{aset.id_aset.id_jenis.id_klasifikasi_id}}-{{aset.id_aset.id_jenis_id}}-{{aset.id_aset.id_ruangan.id_lokasi_id}}-{{aset.id_aset.no}}-{{aset.id_aset.tahun_perolehan}}</td>
+            <td>{{aset.id_aset.no_register}}</td>
+            <td>{{aset.judul_buku}}</td>
+            <td>{{aset.spesifikasi_buku}}</td>
+            <td>{{aset.asal_daerah_kesenian}}</td>
+            <td>{{aset.pencipta_kesenian}}</td>
+            <td>{{aset.bahan_kesenian}}</td>
+            <td>{{aset.jenis_hewan}}</td>
+            <td>{{aset.ukuran_hewan}}</td>
+            <td>{{aset.jumlah_hewan}}</td>
+            <td>{{aset.id_aset.tahun_perolehan}}</td>
+            <td>{{aset.id_aset.asal_usul}}</td>
+            <td>{{aset.id_aset.harga |intcomma}}</td>
+            <td>{{aset.id_aset.keterangan}}</td>
+          </tr>
+        {% endfor %}
+      </table>    
+      <table id='tes'>
+        <tr>
+          <td style="text-align: center;"> MENGETAHUI,PENGURUS YAYASAN SHINE AL-FALAH</td> 
+          <td style="text-align: center;">.......................................................</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">(.....................................................)</td>
+          <td style="text-align: center;">(.....................................................)</td>
+          
+        </tr>
+      </table>   
+</body>
+</html>

@@ -1,0 +1,172 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style type="text/css">
+        @page {
+            size: A4 landscape;
+            margin-left: 1.58cm;
+            margin-top: 1.18cm;
+            margin-right: 1.18cm;
+            margin-bottom: 1.18cm;
+            @frame footer_frame { /* Another static Frame */
+                  -pdf-frame-content: footer_content;
+                  right: -400pt; width: 512pt; bottom:  0.75cm; height: 20pt;
+                  }
+
+        }
+        img.img{
+          width: 50px;
+          zoom: 130%;
+        }
+        h2{
+          font-family: 'Times New Roman';
+        }
+  
+        h2{
+            margin: 0;
+            padding-bottom: 25px;
+            text-align: center;
+            font-size: 6;
+        }
+        #tables {
+          font-family: 'Verdana';
+          font-weight: bolder;
+          border-collapse: collapse;
+          width: 100%;
+          font-size: 7px;
+          
+
+        }
+        #tables td, #tables th {
+          border: 0.5px solid rgb(63, 63, 63);
+        }
+
+        #tables th {
+          text-align: center;
+          background-color: #daeca8;
+          color: black;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        #tables td{
+          text-align: center;
+          padding-top: 3px;
+          padding-bottom: 1px;
+        }
+        table{
+          width: 100%;
+          max-width: 100%;
+          margin-bottom: 5px;
+          background-color: #fff;
+          
+        }
+        #tes{
+          border :none;
+          padding-top: 15px;
+          padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+  <div id="footer_content">(c) - Halaman <pdf:pagenumber>
+    / <pdf:pagecount>
+  </div>
+  
+  <header >
+    <span style="font-size: 3;"> {{ today | date:"d / F / Y" }}</span>   
+  <table id="tes">
+    <tr>
+      <th style="text-align:right; padding: auto;"><img class="img" src="AdminLTE/dist/img/shinealfalah.png" alt=""></th>
+      <th style="text-align: left; padding: auto;" rowspan="2"><strong> <h2> YAYASAN SHINE AL-FALAH REKAP KARTU INVENTARIS BARANG 
+        C. GEDUNG DAN BANGUNAN</h2></strong></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+
+  </table>
+  </header>
+        
+        <table id="tables">
+          <tr>
+            <th class="no" style="width:25px" rowspan="2">No  </th>
+            <th style="width:130px" rowspan="2">Nama Barang/Jenis Barang</th>
+            <th colspan="2">Nomor </th>
+            <th style="width:50px" rowspan="2">Kondisi Bangunan </th>
+            <th colspan="2">Kontruksi Bangunan</th>
+            <th style="width:65px" rowspan="2">Luas Lantai (M2)</th>
+            <th style="width:110px" rowspan="2">Letak / Lokasi Alamat</th>
+            <th colspan="2" >Dokumen Gedung</th>
+            <th style="width:80px" rowspan="2">Luas </th>
+            <th style="width:80px" rowspan="2">Status Tanah</th>
+            <th style="width:110px" rowspan="2">Kode Tanah</th>
+            <th style="width:90px" rowspan="2">Asal Usul Cara Perolehan</th>
+            <th style="width:65px" rowspan="2">Harga Dalam Ribuan (Rp.) </th>
+            <th style="width:100px" rowspan="2">Keterangan</th>
+          </tr>
+          <tr>
+            <td style="width:110px">Kode Barang</td>
+            <td style="width:50px">Register</td>
+            <td style="width:80px">Bertingkat/Tidak</td>
+            <td style="width:80px">Beton/Tidak</td>
+            <td style="width:90px">Tanggal </td>
+            <td style="width:50px">Nomor</td>
+          </tr>
+        {% for aset in kibc %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{aset.id_aset.nama_aset}}</td>
+            <td >{{aset.id_aset.id_ruangan.id_kelompok_id}}-{{aset.id_aset.id_jenis.id_klasifikasi_id}}-{{aset.id_aset.id_jenis_id}}-{{aset.id_aset.id_ruangan.id_lokasi_id}}-{{aset.id_aset.no}}-{{aset.id_aset.tahun_perolehan}}</td>
+            <td>{{aset.id_aset.no_register}}</td>
+            {% if aset.id_aset.status_aset == "B" %}
+            <td>{{aset.id_aset.get_status_aset_display}}</td>
+            {% elif aset.id_aset.status_aset == "KB" %}
+            <td>{{aset.id_aset.get_status_aset_display}}</td>
+            {% elif aset.id_aset.status_aset == "RB" %}
+            <td>{{aset.id_aset.get_status_aset_display}}</td>
+            {% endif %}
+            {% if aset.kontruksi_bertingkat == 1 %}
+            <td>Ya</td>
+            {% else %}
+            <td>Tidak</td>
+            {% endif %}
+
+            {% if aset.kontruksi_beton == 1 %}
+            <td>Ya</td>
+            {% else %}
+            <td>Tidak</td>
+            {% endif %}
+
+            <td >{{aset.luas_lantai}}</td>
+            <td>{{aset.id_aset.id_ruangan.id_lokasi.nama_lokasi}},{{aset.id_aset.id_ruangan.id_lokasi.alamat}}</td>
+            <td >{{aset.tanggal_dokumen_gedung|date:'d/F/Y'}}</td>
+            <td>{{aset.no_dokumen_gedung}}</td>
+            <td>{{aset.luas}}</td>
+            <td>{{aset.status_tanah}}</td>
+            <td>{{aset.no_kode_tanah}}</td>
+            <td>{{aset.id_aset.asal_usul}}</td>
+            <td>{{aset.id_aset.harga |intcomma}}</td>
+            <td>{{aset.id_aset.keterangan}}</td>
+          </tr>
+        {% endfor %}
+      </table>    
+      <table id='tes'>
+        <tr>
+          <td style="text-align: center;"> MENGETAHUI,PENGURUS YAYASAN SHINE AL-FALAH</td> 
+          <td style="text-align: center;">.......................................................</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">(.....................................................)</td>
+          <td style="text-align: center;">(.....................................................)</td>
+          
+        </tr>
+      </table>    
+</body>
+</html>

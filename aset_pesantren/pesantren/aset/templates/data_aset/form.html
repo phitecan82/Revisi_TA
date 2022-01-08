@@ -1,0 +1,77 @@
+<form action="{% url 'aset:addData'%}" method="POST" enctype="multipart/form-data" id="indexForm" >
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-body">
+        
+    <br>  
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="nama_aset">Nama Aset</label>
+        <input type="text" name="nama_aset" autofocus placeholder="Nama Aset" class="form-control" id="nama_aset" maxlength="50" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="no_register">Nomor Register Aset</label>
+        <input type="text" name="no_register" class="form-control"  maxlength="20" id="no_register" required>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="id_jenis">  Klasifikasi | Jenis Aset</label>
+        <select  id="id_jenis " name="id_jenis" class=" form-control " required>
+          {% for jenis in jenis_list %}
+          <option value="{{jenis.id_jenis}}">{{jenis.id_klasifikasi.nama_klasifikasi }} | {{jenis.nama_jenis}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="id_ruangan"> Ruangan  | Pelaksana | Lokasi </label>
+        <select  id="id_ruangan " name="id_ruangan" class=" form-control "  required>
+          {% for ruangs in ruang %}
+          <option value="{{ruangs.id_ruang}}">{{ruangs.nama_ruang}}  |{{ruangs.id_lokasi.nama_lokasi}} | {{ruangs.id_kelompok.nama_kelompok}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="no">No Urut</label>
+        <input type="number" name="no" class="form-control " id="no" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length== 4) return false;" min="1" required >
+      </div>   
+      
+      <div class="form-group col-md-2">
+        <label for="tahun_perolehan">Tahun Perolehan</label>
+        <input type="number" name="tahun_perolehan" class="form-control " id="tahun_perolehan" min="1990" pattern="/^-?\d+\.?\d*$/" placeholder="2020" onKeyPress="if(this.value.length==4) return false;" required>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="asal_usul">Asal Usul Aset</label>
+        <input type="text" name="asal_usul" class="form-control" id="asal_usul" maxlength="50" required>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="harga">Harga Aset</label>
+        <div class="input-group mb-2">
+        <span class="input-group-text">Rp.</span>
+        <input type="number" name="harga" class="form-control " id="harga"  min="1" " pattern="/^-?\d+\.?\d*$/" placeholder="20.000" onKeyPress="if(this.value.length==11) return false;" required>
+        </div>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="status_aset"> Status Aset </label>
+        <select  id="status_aset " name="status_aset" class=" form-control " required>
+          <option value="B">Baik</option>
+          <option value="KB">Kurang Baik</option>
+          <option value="RB">Rusak Berat</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="keterangan">Keterangan Aset</label>
+        <textarea name="keterangan" id="keterangan" rows="10"  class="form-control" placeholder="Masukkan keterangan aset ........"></textarea>
+      </div>
+    </div>
+</div>
+</div>
+  <button type="submit" class="btn btn-primary">Tambah Data </button>
+</form>
+
+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %} {% endblock %}</title>
+  {% load static %}
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "./link.html" %}
+  {% block link %}{% endblock %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $('#golongan').change(function(){
+        $('.myDiv').hide();
+        $('#' + $(this).val()).show();
+      });
+    });
+    </script>
+  <style>
+    .myDiv{
+      display:none;
+    }  
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+  {% include "./header.html" %}
+  <!-- /.navbar -->
+  <!-- Main Sidebar Container -->
+   <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-light-success elevation-4">
+    <!-- Brand Logo -->
+    <a href="https://yayasanshinealfalah.wordpress.com/tentang/" class="brand-link navbar-success">
+      <img src="{% static 'AdminLTE/dist/img/shinealfalah.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+      <span class="brand-text font-weight-light">Shine Al-Falah</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <li class="nav-item has-treeview {% block navmenuopendashboard %} {% endblock %}">
+                <a href="{% url 'aset:dashboard1' %}" class="nav-link {% block navactivedashboard %}  {% endblock %}">
+                  <i class="nav-icon fas fa-chart-area"></i>
+                  <p>
+                    Dashboard
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item has-treeview {% block navmenuopendataaset %} {% endblock %}">
+                <a href="{% url 'aset:indexData_aset' %}" class="nav-link {% block navactivedataaset %}  {% endblock %}">
+                  <i class="nav-icon fas fa-archive"></i>
+                  <p>
+                    Data Aset
+                  </p>
+                </a>
+              </li>
+          <li class="nav-item has-treeview {% block navmenuopenkib %} {% endblock %}">
+            <a href="#" class="nav-link {% block navactivekib %}  {% endblock %}">
+              <i class="nav-icon fas fa-sd-card"></i>
+              <p>
+              Kartu Inventaris Barang
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKiba' %}" class="nav-link {% block navactivekiba %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> KIB A</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKibb' %}" class="nav-link {% block navactivekibb %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>KIB B</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKibc' %}" class="nav-link nav-link {% block navactivekibc %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>KIB C</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKibd' %}" class="nav-link nav-link {% block navactivekibd %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>KIB D</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item has-treeview {% block nav-menu-open-gaji %} {% endblock %} ">
+            <a href="#" class="nav-link {% block nav-active-gaji %}  {% endblock %}">
+              <i class="nav-icon fas fa-envelope "></i>
+              <p>
+                Surat Penghapusan Barang
+              </p>
+            </a>
+          </li> -->
+          <li class="nav-header">MASTER DATA</li>
+          <li class="nav-item has-treeview {% block navmenuopenkodeaset %} {% endblock %}">
+            <a href="#" class="nav-link {% block navactivekodeaset %}  {% endblock %}">
+              <i class="nav-icon fas fa-qrcode"></i>
+              <p>
+                Kode Aset
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKelompok' %}" class="nav-link {% block navactivekelompokaset %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pelaksana Kegiatan Yayasan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexLokasi' %}" class="nav-link {% block navactivelokasiaset %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lokasi Aset</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexKlasifikasi' %}" class="nav-link {% block navactiveklasifikasiaset %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Klasifikasi Aset</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexJenis' %}" class="nav-link nav-link {% block navactivejenisaset %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jenis Aset</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'aset:indexRuangan' %}" class="nav-link nav-link {% block navactivedataruang %}  {% endblock %}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ruangan Aset</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="alert {% if message.tags %} alert-{{ message.tags }} {% endif %}" role="alert">
+          {{ message }}
+          {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      {% endif %}
+      <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-left">
+              {% block content-header-page %} 
+
+              {% endblock %}
+            </ol>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              {% block print %} 
+              
+              {% endblock %}
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Main row -->
+        {% block content %}{% endblock %}
+        <!-- /.row main row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include "./footer.html" %}
+</div>
+<!-- ./wrapper -->
+
+{% include "./script.html" %}
+{% block script %}{% endblock %}
+</body>
+</html>

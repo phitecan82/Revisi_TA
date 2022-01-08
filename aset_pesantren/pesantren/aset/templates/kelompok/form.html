@@ -1,0 +1,17 @@
+<form action="{% url 'aset:addKelompok'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+
+      <div class="form-group col-md-3">
+        <label for="id_kelompok">ID Pelasana Kegiatan </label>
+        <input type="text" name="id_kelompok" class=" form-control " id="id_kelompok" maxlength="5" >
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="nama_kelompok">Nama Pelaksana Kegiatan</label>
+        <input type="text" name="nama_kelompok" class="form-control" id="nama_kelompok" maxlength="50" required>
+      </div>
+    
+    </div>
+    <button type="submit" class="btn btn-primary">Tambah Data</button>
+  </form>
