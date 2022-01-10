@@ -1,6 +1,6 @@
 {% extends "../layouts/app.html" %}
 
-{% block title %} Aset {% endblock title %}
+{% block title %} KIB D {% endblock title %}
 
 {% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
 {% block navactivekib %} active {% endblock navactivekib %}
@@ -35,6 +35,7 @@
   </table>
   
 {% endblock print %}
+{% load humanize %}
 {% block content %}
 <div class="row">
     <!-- Left col -->
@@ -68,6 +69,8 @@
                         <th scope="col">Jenis Hewan</th>
                         <th scope="col">Ukuran Hewan</th>
                         <th scope="col">Jumlah </th>
+                        <th scope="col">Harga </th>
+                        <th scope="col">Asal Usul </th>
                         <th scope="col">Aksi</th>
                       </tr>
                     </thead>
@@ -89,6 +92,8 @@
                         <td>{{kibd.jenis_hewan}}</td>
                         <td>{{kibd.ukuran_hewan}}</td>
                         <td>{{kibd.jumlah_hewan}}</td>
+                        <td>Rp.{{kibd.id_aset.harga|intcomma}}</td>
+                        <td>{{kibd.id_aset.asal_usul }}</td>
                         <td>
                           <style> 
                                   i.jambu{color:green}

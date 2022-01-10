@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.contrib.auth.decorators import login_required
+
+admin.site.login = login_required(admin.site.login, login_url='../../admin/login')
+admin.site.site_header  =  "SIM Aset | Shine Al-Falah"  
+admin.site.site_title  =  "Administrasi"
+admin.site.index_title  =  ""
 
 urlpatterns = [
     path('', include('aset.urls')),
-    path('admin/', admin.site.urls),
+    path('users/', admin.site.urls),
+    path('admin/', include('django.contrib.auth.urls')),
 ]

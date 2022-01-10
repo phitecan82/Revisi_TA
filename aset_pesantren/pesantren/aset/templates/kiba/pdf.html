@@ -107,7 +107,7 @@
               <tr>
                 <th class="no" style="width:25px" rowspan="2">No  </th>
                 <th style="width:180px" rowspan="2">Nama Barang / Jenis Barang</th>
-                <th style="width:150px" colspan="2">Nomor</th>
+                <th colspan="2">Nomor</th>
                 <th style="width:110px" rowspan="2">Luas (m2)</th>
                 <th style="width:110px" rowspan="2">Tahun Pengadaan / Perolehan</th>
                 <th style="width:190px" rowspan="2">Letak / Alamat</th>
@@ -118,8 +118,8 @@
                 <th style="width:100px" rowspan="2">Keterangan</th>
               </tr>
               <tr>
-                <td style="width:30px">Kode Barang</td>
-                <td style="width:30px">Register</td>
+                <td >Kode Barang</td>
+                <td >Register</td>
                 <td style="width:40">Hak</td>
                 <td style="width:60">Tanggal</td>
                 <td style="width:30px">Nomor</td>
@@ -128,7 +128,7 @@
               <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{aset.id_aset}}</td>
-                <td style="width:100px">{{aset.id_aset.id_ruangan.id_kelompok_id}}-{{aset.id_aset.id_jenis.id_klasifikasi_id}}-{{aset.id_aset.id_jenis_id}}-{{aset.id_aset.id_ruangan.id_lokasi_id}}-{{aset.id_aset.no}}-{{aset.id_aset.tahun_perolehan}}</td>
+                <td style="width:110px">{{aset.id_aset.id_ruangan.id_kelompok_id}}-{{aset.id_aset.id_jenis.id_klasifikasi_id}}-{{aset.id_aset.id_jenis_id}}-{{aset.id_aset.id_ruangan.id_lokasi_id}}-{{aset.id_aset.no}}-{{aset.id_aset.tahun_perolehan}}</td>
                 <td style="width:40">{{aset.id_aset.no_register}}</td>
                 <td>{{aset.luas}}</td>
                 <td>{{aset.id_aset.tahun_perolehan}}</td>

@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SIM ASET Yayasan Shine Al - Falah | Log in</title>
+  <title>SIM Aset  Shine Al - Falah </title>
+  <link rel = "icon" href = 
+  "../../static/AdminLTE/dist/img/shinealfalah.png" 
+          type = "image/x-icon">
   {% load static %}
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +25,17 @@
       <img class="rounded mx-auto d-block" width="60px" src="../static/AdminLTE/dist/img/shinealfalah.png" alt="">
       <p class="login-box-msg"> <span> SIM  Aset Shine Al - Falah </span></p>
       <hr>
+      {% if user.is_authenticated %}
+      <p>Anda Sudah Login</p>
+      <a href="{% url 'aset:dashboard1'%}">Dashboard</a>
+
+    {% else %}
+      <p class="login-box-msg"></p>
+
+      {% if next %}
+        <p class=" text-danger">Silahkan Login untuk <strong>Masuk</strong> Laman.</p>
+      {% endif %}
+      
       <form action="{% url 'aset:login' %}" method="post">
         {% csrf_token %}
         <div class="input-group mb-3">
@@ -50,6 +64,15 @@
           <!-- /.col -->
         </div>
       </form>
+
+      {% if form.errors %}
+        <p class=" text-danger">
+             <strong>username dan password</strong> Tidak Sesuai. 
+            Silahkan Coba Kembali.
+        </p>
+        {% endif %}
+        
+        {% endif %}
 
       
       <!-- /.social-auth-links -->

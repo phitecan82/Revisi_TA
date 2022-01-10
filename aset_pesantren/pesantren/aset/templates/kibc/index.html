@@ -1,6 +1,6 @@
 {% extends "../layouts/app.html" %}
 
-{% block title %} Aset {% endblock title %}
+{% block title %} KIB C {% endblock title %}
 
 {% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
 {% block navactivekib %} active {% endblock navactivekib %}
@@ -69,6 +69,8 @@
                         <th scope="col">Luas Keseluruhan</th>
                         <th scope="col">Status Tanah</th>
                         <th scope="col">No Kode Tanah</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Asal Usul</th>
                         <th scope="col">Aksi</th>
                       </tr>
                     </thead>
@@ -97,6 +99,8 @@
                         <td>{{kibc.luas }} M <sup> 2 </sup> </td>
                         <td>{{kibc.status_tanah}}</td>
                         <td>{{kibc.no_kode_tanah}}</td>
+                        <td>Rp.{{kibc.id_aset.harga|intcomma}}</td>
+                        <td>{{kibc.id_aset.asal_usul }}</td>
                         <td>
                           <style> 
                                   i.jambu{color:green}

@@ -15,7 +15,7 @@
 {% endblock content-header-page %}
 
 {% block print %}
-<table>
+<table >
   <form  action="{% url 'aset:printAsett'%}" method="POST"  target="_blank">
     {% csrf_token %}
   <tr>
@@ -27,7 +27,7 @@
           {% endfor %}
       </select>
     </td>
-    <td style="text-align: right; "><button type="submit"  class="btn btn-primary ">KIR</a></button></td>
+    <td style="text-align: right; "><button type="submit"  class="btn btn-primary">KIR</a></button></td>
   </tr>
 </form>
 <tr>

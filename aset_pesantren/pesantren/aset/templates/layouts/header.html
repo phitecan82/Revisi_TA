@@ -12,10 +12,23 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-  
-          
-            <button type="submit" class="btn btn-outline-light   btn-sm" name="logout"><i class="fas fa-sign-out-alt"><a href="{% url 'aset:logout' %}" style="color: whitesmoke;"> Logout</a> </button></i>
-          
+            <div class="dropdown">
+              <button class="btn btn-success btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if user.is_superuser%}
+                <i class="fas fa-user-shield"> Admin</i>
+                {% else%}
+                <i class="fas fa-user-tie"> Operator</i>
+                {%endif%}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                {% if user.is_superuser%}
+                <button class="dropdown-item btn-success" type="button"><i class="fas fa-user"></i><a href="../users/" style="color: black;"> Kelola Pengguna</a></button>
+                {%else%}
+                <button class="dropdown-item" type="button"><i class="fas fa-lock"></i><a href="../users/password_change" style="color: black;"> Kelola Sandi</a></button>             
+                {%endif%}
+                <button type="submit" class=" dropdown-item btn-success" name="logout"><i class="fas fa-sign-out-alt"><a href="{% url 'aset:logout' %}" style="color: black;" onclick="return confirm('Logout?')"> Logout</a> </button></i>
+              </div>
+            </div>
         </a>
       </li>
     </ul>

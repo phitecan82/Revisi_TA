@@ -1,6 +1,6 @@
 {% extends "../layouts/app.html" %}
 
-{% block title %} Aset {% endblock title %}
+{% block title %} KIB A {% endblock title %}
 
 {% block navmenuopenkib %} menu-open {% endblock navmenuopenkib %}
 {% block navactivekib %} active {% endblock navactivekib %}
@@ -12,7 +12,7 @@
 {% endblock content-header-page %}
 
 {% block print %}
-  <table>
+  <table class="table-sm">
     <form  action="{% url 'aset:Print_kiba'%}" method="POST"  target="_blank">
       {% csrf_token %}
       <tr>
@@ -43,6 +43,7 @@
   </table>
   
 {% endblock print %}
+{% load humanize %}
 {% block content %}
 <div class="row">
     <!-- Left col -->
@@ -71,6 +72,8 @@
                         <th scope="col">Tanggal Sertifikat</th>
                         <th scope="col">Nomor Sertifikat</th>
                         <th scope="col">Penggunaan</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Asal Usul</th>
                         <th scope="col">Aksi</th>
                       </tr>
                     </thead>
@@ -87,6 +90,8 @@
                         <td>{{kiba.tanggal_sertifikat|date:'d-M-Y'}}</td>
                         <td>{{kiba.no_sertifikat}}</td>
                         <td>{{kiba.penggunaan}}</td>
+                        <td>Rp.{{kiba.id_aset.harga|intcomma}}</td>
+                        <td>{{kiba.id_aset.asal_usul }}</td>
                         <td>
                           <style> 
                                   i.jambu{color:green}
